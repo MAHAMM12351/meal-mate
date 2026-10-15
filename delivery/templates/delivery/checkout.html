@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'delivery/styles.css' %}">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <h2>Welcome, {{ username }}</h2>
+
+    {% if error %}
+        <p>{{ error }}</p>
+        <a class="button-link" href="/">Back to home</a>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>₹{{ item.price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Total: ₹{{ total_price }}</h3>
+        <p class="payment-mode">TEST MODE · No real payment will be taken</p>
+        <button id="rzp-button" type="button">Pay with Razorpay (Test Mode)</button>
+
+        <script>
+            const options = {
+                key: "{{ razorpay_key_id }}",
+                amount: "{{ amount }}",
+                currency: "INR",
+                name: "Meal Mate",
+                description: "Order payment",
+                order_id: "{{ order_id }}",
+                handler: function () {
+                    alert("Payment Successful!");
+                    window.location.href = "{% url 'orders' username %}";
+                },
+                prefill: {
+                    name: "{{ username|escapejs }}",
+                    email: "{{ email|escapejs }}",
+                    contact: "{{ mobile|escapejs }}"
+                },
+                theme: {
+                    color: "#285c46"
+                }
+            };
+            const razorpay = new Razorpay(options);
+
+            document.getElementById("rzp-button").addEventListener("click", function () {
+                razorpay.open();
+            });
+        </script>
+    {% endif %}
+</body>
+</html>

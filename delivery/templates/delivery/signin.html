@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="{% static 'delivery/styles.css' %}">
+</head>
+<body>
+    <main class="auth-layout">
+        <section class="auth-content">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true">m</span>
+                meal mate
+            </a>
+            <h1>Welcome back.</h1>
+            <p class="auth-subtitle">Sign in and find something lovely to eat.</p>
+            <form class="auth-card" action="{% url 'signin' %}" method="post">
+        {% csrf_token %}
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" autocomplete="username" required>
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" autocomplete="current-password" required>
+                <button type="submit">Sign in</button>
+            </form>
+            <p class="auth-switch">New to meal mate?<a href="{% url 'open_signup' %}">Create an account</a></p>
+            <a class="back-link" href="/">← Back to home</a>
+        </section>
+    </main>
+</body>
+</html>

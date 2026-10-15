@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="{% static 'delivery/styles.css' %}">
+</head>
+<body>
+    <main class="auth-layout">
+        <section class="auth-content">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true">m</span>
+                meal mate
+            </a>
+            <h1>Let's make it delicious.</h1>
+            <p class="auth-subtitle">Create an account to discover your next favorite.</p>
+            <form class="auth-card" action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" autocomplete="username" required>
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" autocomplete="new-password" required>
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" autocomplete="email" required>
+                <label for="mobile">Mobile</label>
+                <input id="mobile" type="tel" name="mobile" autocomplete="tel" required>
+                <label for="address">Address</label>
+                <textarea id="address" name="address" autocomplete="street-address" required></textarea>
+                <button type="submit">Create account</button>
+            </form>
+            <p class="auth-switch">Already have an account?<a href="{% url 'open_signin' %}">Sign in</a></p>
+            <a class="back-link" href="/">← Back to home</a>
+        </section>
+    </main>
+</body>
+</html>

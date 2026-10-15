@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Meal Buddy</title>
+    <link rel="stylesheet" href="{% static 'delivery/styles.css' %}">
+</head>
+<body class="landing-page">
+    <header class="site-nav">
+        <a class="brand" href="/">
+            <span class="brand-mark" aria-hidden="true">m</span>
+            meal mate
+        </a>
+        <a class="nav-link" href="{% url 'open_signin' %}">Sign in</a>
+    </header>
+
+    <main class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Good food, good mood</p>
+            <h1>Your next favorite meal is <em>closer.</em></h1>
+            <p class="hero-description">
+                Discover lovely local kitchens and the kind of food that makes
+                an ordinary day feel a little more special.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link" href="{% url 'open_signup' %}">Find your flavor <span aria-hidden="true">&nbsp;→</span></a>
+                <a class="text-link" href="{% url 'open_signin' %}">I have an account</a>
+            </div>
+        </div>
+        <div class="hero-art" aria-label="Freshly prepared meal">
+            <img
+                class="hero-photo"
+                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&amp;fit=crop&amp;w=1100&amp;q=85"
+                alt="Colorful fresh salad bowl"
+            >
+            <div class="photo-frame" aria-hidden="true"></div>
+            <div class="floating-note">A little joy, served fresh<span>Made for your moment</span></div>
+        </div>
+    </main>
+
+    <footer class="landing-footer">
+        <span>Made with care, for the love of good food.</span>
+        <span>Welcome to meal mate</span>
+    </footer>
+</body>
+</html>

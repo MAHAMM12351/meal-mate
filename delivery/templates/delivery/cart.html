@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'delivery/styles.css' %}">
+</head>
+<body>
+    <h1>Your cart</h1>
+    <p>Hi {{ username }}, here is your order.</p>
+
+    {% if itemList %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in itemList %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td><img src="{{ item.picture }}" alt="{{ item.name }}"></td>
+                        <td>{{ item.description }}</td>
+                        <td>₹{{ item.price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Total: ₹{{ total_price }}</h2>
+        <a class="button-link" href="{% url 'checkout' username %}">Continue to payment <span aria-hidden="true">&nbsp;→</span></a>
+    {% else %}
+        <p>Your cart is empty. Add something delicious to get started.</p>
+        <a class="button-link" href="/">Back to home</a>
+    {% endif %}
+</body>
+</html>
